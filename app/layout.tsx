@@ -6,8 +6,8 @@ import { Toaster } from "@/components/ui/toaster";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "O'Reilly Answers QA Dashboard",
-  description: "Internal dashboard for triaging AI-generated answer feedback",
+  title: "Knowledge QA Dashboard",
+  description: "Internal dashboard for triaging AI-generated answer feedback from knowledge base systems",
 };
 
 export default function RootLayout({

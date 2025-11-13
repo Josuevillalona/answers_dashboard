@@ -3,6 +3,8 @@ import { requireAuth } from '@/lib/auth';
 import { Nav } from '@/components/nav';
 import { EscalationsTable } from '@/components/escalations/escalations-table';
 import { EscalationsFilters } from '@/components/escalations/escalations-filters';
+import { EmptyState } from '@/components/ui/empty-state';
+import { AlertTriangle } from 'lucide-react';
 import type { Escalation, Feedback } from '@/lib/types/database.types';
 
 interface SearchParams {
@@ -68,7 +70,19 @@ export default async function EscalationsPage({
         <EscalationsFilters />
 
         <div className="mt-6">
-          <EscalationsTable escalations={(escalations as EscalationWithFeedback[]) || []} />
+          {!escalations || escalations.length === 0 ? (
+            <EmptyState
+              icon={AlertTriangle}
+              title="No escalations found"
+              description={
+                params.team || params.priority || params.status
+                  ? "No escalations match your current filters. Try adjusting or clearing the filters."
+                  : "There are no open escalations at this time."
+              }
+            />
+          ) : (
+            <EscalationsTable escalations={(escalations as EscalationWithFeedback[]) || []} />
+          )}
         </div>
       </main>
     </div>

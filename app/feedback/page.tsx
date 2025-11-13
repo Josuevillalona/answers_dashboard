@@ -3,6 +3,8 @@ import { requireAuth } from '@/lib/auth';
 import { Nav } from '@/components/nav';
 import { FeedbackTable } from '@/components/feedback/feedback-table';
 import { FeedbackFilters } from '@/components/feedback/feedback-filters';
+import { EmptyState } from '@/components/ui/empty-state';
+import { MessageSquare } from 'lucide-react';
 import type { Feedback } from '@/lib/types/database.types';
 
 interface SearchParams {
@@ -73,12 +75,24 @@ export default async function FeedbackPage({
         <FeedbackFilters />
 
         <div className="mt-6">
-          <FeedbackTable
-            feedback={(feedback as Feedback[]) || []}
-            currentPage={page}
-            totalPages={totalPages}
-            totalCount={count || 0}
-          />
+          {!feedback || feedback.length === 0 ? (
+            <EmptyState
+              icon={MessageSquare}
+              title="No feedback found"
+              description={
+                params.search || params.rating || params.status
+                  ? "No feedback matches your current filters. Try adjusting or clearing the filters."
+                  : "There is no feedback data available yet."
+              }
+            />
+          ) : (
+            <FeedbackTable
+              feedback={(feedback as Feedback[]) || []}
+              currentPage={page}
+              totalPages={totalPages}
+              totalCount={count || 0}
+            />
+          )}
         </div>
       </main>
     </div>

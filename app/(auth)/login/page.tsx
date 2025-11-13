@@ -52,7 +52,7 @@ export default function LoginPage() {
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl font-bold">Login</CardTitle>
           <CardDescription>
-            Enter your credentials to access the QA Dashboard
+            Enter your credentials to access Knowledge QA
           </CardDescription>
         </CardHeader>
         <form onSubmit={handleLogin}>
