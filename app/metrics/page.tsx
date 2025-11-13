@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/server';
+import { requireAuth } from '@/lib/auth';
 import { Nav } from '@/components/nav';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
@@ -14,6 +15,7 @@ export default async function MetricsPage({
 }: {
   searchParams: Promise<SearchParams>;
 }) {
+  await requireAuth(); // Protect this page
   const params = await searchParams;
   const supabase = await createClient();
 

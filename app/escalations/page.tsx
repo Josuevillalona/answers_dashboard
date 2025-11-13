@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/server';
+import { requireAuth } from '@/lib/auth';
 import { Nav } from '@/components/nav';
 import { EscalationsTable } from '@/components/escalations/escalations-table';
 import { EscalationsFilters } from '@/components/escalations/escalations-filters';
@@ -19,6 +20,7 @@ export default async function EscalationsPage({
 }: {
   searchParams: Promise<SearchParams>;
 }) {
+  await requireAuth(); // Protect this page
   const params = await searchParams;
   const supabase = await createClient();
 

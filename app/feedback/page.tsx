@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/server';
+import { requireAuth } from '@/lib/auth';
 import { Nav } from '@/components/nav';
 import { FeedbackTable } from '@/components/feedback/feedback-table';
 import { FeedbackFilters } from '@/components/feedback/feedback-filters';
@@ -16,6 +17,7 @@ export default async function FeedbackPage({
 }: {
   searchParams: Promise<SearchParams>;
 }) {
+  await requireAuth(); // Protect this page
   const params = await searchParams;
   const supabase = await createClient();
 

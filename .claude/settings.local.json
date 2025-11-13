@@ -10,7 +10,9 @@
       "Bash(nul)",
       "Bash(npm run seed:*)",
       "Bash(npx:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
     ],
     "deny": [],
     "ask": []
